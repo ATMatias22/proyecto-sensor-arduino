@@ -14,6 +14,11 @@
 int MAX_INTENTOS_DE_CONEXION = 30;
 
 class ConexionWifi {
+    // Constructor privado para evitar instanciación directa
+  private:
+    ConexionWifi() {
+
+    }
   public:
 
     static void conectar() {
