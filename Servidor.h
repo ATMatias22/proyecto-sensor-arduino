@@ -107,7 +107,7 @@ class Servidor {
           serializeJson(responseJsonDoc, respuesta);
           server.send(403, "application/json", respuesta);
         }
-
+        responseJsonDoc["on"] = false;
         if (EstadoDeSensor::getEstadoSensor() == 1) {
           EstadoDeSensor::setViejoEstadoDelBoton(1);
           EstadoDeSensor::setEstadoSensor(0);
