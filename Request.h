@@ -66,5 +66,5 @@ class Request {
 
 char* Request::HOST = "192.168.0.29";
 char* Request::ENDPOINT = "/app_movil_sensor/api/arduino/add-informative-message";
-int Request::PORT = 8080;
+int Request::PORT = 8081;
 #endif
