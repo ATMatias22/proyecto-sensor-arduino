@@ -23,12 +23,6 @@ class ConexionWifi {
 
     static void conectar() {
 
-      // Configurar la dirección IP estática
-      IPAddress ip(192, 168, 0, 254);  // Dirección IP deseada
-      IPAddress gateway(192, 168, 0, 1);  // Puerta de enlace
-      IPAddress subnet(255, 255, 255, 0);  // Máscara de subred
-
-      WiFi.config(ip, gateway, subnet);
 
       String p = VariablesEEPROM::obtenerPassword();
       String s = VariablesEEPROM::obtenerSSID();
@@ -60,8 +54,15 @@ class ConexionWifi {
         Serial.println("estoy despues del autoconect");
       } else {
         Serial.println("Conectado a WiFi");
-        Serial.println(WiFi.localIP());
       }
+
+            // Configurar la dirección IP estática
+      IPAddress ip(192, 168, 0, 254);  // Dirección IP deseada
+      IPAddress gateway(192, 168, 0, 1);  // Puerta de enlace
+      IPAddress subnet(255, 255, 255, 0);  // Máscara de subred
+
+      WiFi.config(ip, gateway, subnet);
+          Serial.println(WiFi.localIP());
     }
 
 };
