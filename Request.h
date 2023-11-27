@@ -4,29 +4,26 @@
 
 #include <ESP8266WiFi.h>
 #include <ESP8266HTTPClient.h>
-#include <WiFiClient.h>
 #include <ArduinoJson.h>
+#include <WiFiClientSecure.h> 
 
 class Request {
   private:
     static char* HOST ;
-    static char* ENDPOINT ;
+    static char* URI ;
     static int PORT ;
 
   public:
     static void enviarMensaje(String mensaje) {
 
       if (WiFi.status() == WL_CONNECTED) {
-        WiFiClient client;
+        WiFiClientSecure client;
+        client.setFingerprint("95:F6:BE:80:49:C9:6A:D2:B3:72:88:CA:E5:5C:2A:71:A7:1B:81:2B");
         HTTPClient http;
-
-        // Configura la URL del endpoint
-        String url = "http://" + String(Request::HOST) + ":" + Request::PORT + String(Request::ENDPOINT);
-        Serial.println(url);
 
         Serial.println(WiFi.status());
 
-        http.begin(client, url); //HTTP
+        http.begin(client, Request::HOST,Request::PORT, Request::URI,true ); //HTTP
 
         // Configura los encabezados de la solicitud POST
         http.addHeader("Content-Type", "application/json");
@@ -64,7 +61,7 @@ class Request {
     }
 };
 
-char* Request::HOST = "192.168.0.29";
-char* Request::ENDPOINT = "/app_movil_sensor/api/arduino/add-informative-message";
-int Request::PORT = 8081;
+char* Request::HOST = "proyecto-backend-movil-production.up.railway.app";
+char* Request::URI = "/app_movil_sensor/api/arduino/add-informative-message";
+int Request::PORT = 443;
 #endif
